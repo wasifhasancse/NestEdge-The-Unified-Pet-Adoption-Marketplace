@@ -38,7 +38,7 @@ export const PetLoadingScreen: React.FC = () => {
 
     timeout = setTimeout(updateLoading, 500);
     return () => clearTimeout(timeout);
-  }, []);
+  }, [statuses.length]);
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6 py-10 text-center text-foreground transition-colors duration-300">
@@ -75,7 +75,7 @@ export const PetLoadingScreen: React.FC = () => {
         {/* Progress Tracker Section */}
         <div className="mt-12 flex w-full flex-col items-center">
           {/* Progress Track */}
-          <div className="relative h-[4px] w-[220px] overflow-hidden rounded-full bg-secondary md:w-[260px]">
+          <div className="relative h-1 w-55 overflow-hidden rounded-full bg-secondary md:w-65">
             <div
               className="absolute left-0 top-0 h-full rounded-full bg-primary transition-all duration-500 ease-out shadow-[0_0_8px_rgba(var(--primary-rgb),0.5)]"
               style={{ width: `${progress}%` }}
@@ -84,7 +84,7 @@ export const PetLoadingScreen: React.FC = () => {
 
           {/* Status Label & Bouncing Indicators */}
           <div className="mt-5 flex flex-col items-center gap-3 sm:flex-row sm:gap-2">
-            <span className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium min-h-[16px]">
+            <span className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground font-medium min-h-4">
               {progress >= 100 ? "Ready to meet your match" : statuses[statusIndex]}
             </span>
 

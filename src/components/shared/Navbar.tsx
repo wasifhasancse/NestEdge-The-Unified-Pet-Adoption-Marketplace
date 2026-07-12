@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
                     </div>
                   )}
 
-                  <span className="text-sm font-medium max-w-[100px] truncate text-foreground/90 group-hover:text-foreground transition-colors">
+                  <span className="text-sm font-medium max-w-25 truncate text-foreground/90 group-hover:text-foreground transition-colors">
                     {user?.name?.split(" ")[0]}
                   </span>
 

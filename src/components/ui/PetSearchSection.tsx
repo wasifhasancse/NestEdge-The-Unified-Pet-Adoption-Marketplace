@@ -40,9 +40,9 @@ const PetSearchSection: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background to-muted/30 py-15 md:py-20">
+    <section className="relative overflow-hidden bg-linear-to-b from-background to-muted/30 py-15 md:py-20">
       {/* Decorative Background Elements */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px]" />
       <div className="absolute -top-40 left-1/2 -z-10 h-96 w-96 -translate-x-1/2 rounded-full bg-primary/10 blur-[128px]" />
 
       <div className="max-w-5xl mx-auto px-4">
@@ -50,7 +50,7 @@ const PetSearchSection: React.FC = () => {
         <div className="text-center mb-12 space-y-4">
           <h1 className="text-4xl md:text-6xl font-black tracking-tight text-foreground bg-clip-text">
             Find Your New{" "}
-            <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Companion
             </span>
           </h1>

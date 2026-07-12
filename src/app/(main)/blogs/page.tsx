@@ -121,7 +121,7 @@ const BlogsPage: React.FC = () => {
         <section className="mb-16">
           <div className="bg-card rounded-3xl overflow-hidden border border-border shadow-lg grid grid-cols-1 lg:grid-cols-12">
             {/* Hero Image Viewport */}
-            <div className="lg:col-span-7 relative h-64 sm:h-96 lg:h-full min-h-[380px] overflow-hidden group">
+            <div className="lg:col-span-7 relative h-64 sm:h-96 lg:h-full min-h-95 overflow-hidden group">
               <Image
                 fill
                 src={featuredPost.image}
@@ -231,7 +231,7 @@ const BlogsPage: React.FC = () => {
                   className="bg-card rounded-2xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-300 flex flex-col group"
                 >
                   {/* Card Thumbnail */}
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                  <div className="relative aspect-16/10 overflow-hidden">
                     <Image
                       fill
                       src={post.image}

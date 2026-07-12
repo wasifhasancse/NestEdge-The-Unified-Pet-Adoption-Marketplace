@@ -52,7 +52,7 @@ export const Loader: React.FC<LoaderProps> = ({ size = "section", label = "Loadi
 
   // "section" (default)
   return (
-    <div className="flex flex-col items-center justify-center min-h-[300px] w-full">
+    <div className="flex flex-col items-center justify-center min-h-75 w-full">
       <LoaderCore />
     </div>
   );
