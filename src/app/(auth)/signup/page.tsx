@@ -2,14 +2,10 @@ import SignUpForm from "@/components/authPages/SignUpForm";
 import PetLoadingScreen from "@/components/ui/PetLoadingScreen";
 import React, { Suspense } from "react";
 
-const SignUpPage: React.FC = () => {
+export default function SignUpPage()  {
   return (
-    <div>
-      <Suspense fallback={<PetLoadingScreen />}>
-        <SignUpForm />
-      </Suspense>
-    </div>
+    <Suspense fallback={<PetLoadingScreen />}>
+      <SignUpForm />
+    </Suspense>
   );
 };
-
-export default SignUpPage;

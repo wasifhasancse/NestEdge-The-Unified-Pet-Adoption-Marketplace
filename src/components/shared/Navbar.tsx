@@ -234,11 +234,11 @@ const Navbar: React.FC = () => {
               </div>
             ) : (
               <Link
-                href="/login"
+                href="/signin"
                 className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 active:scale-[0.98] hover:shadow-lg hover:shadow-foreground/5 transition-all duration-200"
               >
                 <User size={15} />
-                <span>Login</span>
+                <span>Sign In</span>
               </Link>
             )}
 

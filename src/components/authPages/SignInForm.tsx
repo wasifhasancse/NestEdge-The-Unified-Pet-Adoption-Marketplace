@@ -205,7 +205,7 @@ const SignInForm: React.FC = () => {
             <p className="text-sm text-foreground">
               New to NestEdge?{" "}
               <Link
-                href="/register"
+                href="/signup"
                 className="text-primary font-semibold hover:underline cursor-pointer"
               >
                 Register Here
