@@ -1,5 +1,4 @@
 import Image from "next/image";
-import dogCat from "@/assets/group.jpg";
 import FAQAccordion from "../ui/FAQAccordion";
 import React from "react";
 
@@ -52,7 +51,7 @@ const FAQSection: React.FC = () => {
 
             <p className="max-w-2xl mx-auto text-muted-foreground text-base md:text-lg leading-relaxed">
               Find answers to the most common questions about pet adoption.
-              We're here to guide you through every step of the journey.
+              We&apos;re here to guide you through every step of the journey.
             </p>
           </div>
 
@@ -63,7 +62,7 @@ const FAQSection: React.FC = () => {
         <div className="lg:col-span-5 bg-card rounded-xl p-6 shadow-sm border border-border text-center">
           <div className="rounded-lg overflow-hidden mb-4">
             <Image
-              src={dogCat}
+              src='https://images.unsplash.com/photo-1570018144715-43110363d70a?q=80&w=1031&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
               alt="Pets"
               width={500}
               height={300}
@@ -75,7 +74,7 @@ const FAQSection: React.FC = () => {
             Still have questions?
           </h3>
 
-          <p className="text-muted-foreground mt-1 mb-4">We're here to help!</p>
+          <p className="text-muted-foreground mt-1 mb-4">We&apos;re here to help!</p>
 
           <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg text-sm hover:opacity-90 transition cursor-pointer">
             CONTACT US
