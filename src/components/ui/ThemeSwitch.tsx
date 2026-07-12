@@ -1,8 +1,8 @@
 "use client";
 
-import { useTheme } from "@/app/providers/Provider";
 import { AnimatePresence, motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import React from "react";
 
 export const ThemeSwitch: React.FC = () => {
