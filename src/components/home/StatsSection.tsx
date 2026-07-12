@@ -107,7 +107,7 @@ const StatsSection: React.FC = () => {
               className="group relative overflow-hidden rounded-3xl border border-border bg-card/80 backdrop-blur-xl p-6 md:p-8 shadow-sm hover:shadow-2xl transition-all duration-500"
             >
               {/* Hover Gradient */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 transition-opacity duration-500" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-linear-to-br from-primary/10 via-transparent to-accent/10 transition-opacity duration-500" />
 
               {/* Icon */}
               <div className="relative z-10 w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">

@@ -105,7 +105,7 @@ const PetBlog: React.FC = () => {
               </div>
 
               {/* Content Container */}
-              <div className="p-6 flex flex-col flex-grow">
+              <div className="p-6 flex flex-col grow">
                 {/* Meta Info */}
                 <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
                   <div className="flex items-center gap-1">
@@ -124,7 +124,7 @@ const PetBlog: React.FC = () => {
                 </h3>
 
                 {/* Excerpt */}
-                <p className="text-muted-foreground text-sm mt-3 line-clamp-3 flex-grow leading-relaxed">
+                <p className="text-muted-foreground text-sm mt-3 line-clamp-3 grow leading-relaxed">
                   {post.excerpt}
                 </p>
 

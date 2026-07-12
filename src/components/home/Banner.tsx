@@ -85,7 +85,7 @@ const Banner: React.FC = () => {
                 }}
                 className="absolute inset-0 bg-cover bg-center transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/25 to-background/95 dark:from-black/40 dark:via-black/20 dark:to-background" />
+              <div className="absolute inset-0 bg-linear-to-b from-background/30 via-background/25 to-background/95 dark:from-black/40 dark:via-black/20 dark:to-background" />
             </div>
           </SwiperSlide>
         ))}
@@ -129,7 +129,7 @@ const Banner: React.FC = () => {
             style={{ fontFamily: "var(--font-poppins)" }}
           >
             Discover Your{" "}
-            <span className="block bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <span className="block bg-linear-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               NestEdge Companion
             </span>
           </motion.h1>
