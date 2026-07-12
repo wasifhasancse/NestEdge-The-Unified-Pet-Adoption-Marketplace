@@ -1,26 +1,27 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import {
-  PawPrint,
-  Mail,
-  Lock,
-  EyeOff,
-  Eye,
-  User,
-  ImageIcon,
-} from "lucide-react";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
-import { authClient } from "@/lib/auth-client";
-import { useRouter, useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
 import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
+import { authClient } from "@/lib/auth-client";
+import {
+  Eye,
+  EyeOff,
+  ImageIcon,
+  Lock,
+  Mail,
+  PawPrint,
+  User,
+} from "lucide-react";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
-const RegisterForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const router = useRouter();
   const [error, setError] = useState<string>("");
   const searchParams = useSearchParams();
@@ -117,7 +118,9 @@ const RegisterForm: React.FC = () => {
               REGISTER
             </h2>
 
-            <p className="text-sm text-muted-foreground mt-1">NestEdge Adoption</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              NestEdge Adoption
+            </p>
           </div>
 
           {/* FORM */}
@@ -298,4 +301,4 @@ const RegisterForm: React.FC = () => {
   );
 };
 
-export default RegisterForm;
+export default SignUpForm;

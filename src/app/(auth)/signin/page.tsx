@@ -1,11 +1,11 @@
-import LoginForm from "@/components/authPages/LoginForm";
+import SignInForm from "@/components/authPages/SignInForm";
 import PetLoadingScreen from "@/components/ui/PetLoadingScreen";
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 
-export default function LoginPage() {
+export default function SignInPage() {
   return (
     <Suspense fallback={<PetLoadingScreen />}>
-      <LoginForm />
+      <SignInForm />
     </Suspense>
   );
 }

@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import { PawPrint, Mail, Lock, EyeOff, Eye } from "lucide-react";
-import Link from "next/link";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
-import React, { useState } from "react";
-import { authClient } from "@/lib/auth-client";
-import { useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
 import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
+import { authClient } from "@/lib/auth-client";
+import { Eye, EyeOff, Lock, Mail, PawPrint } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { FaFacebook } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
-const LoginForm: React.FC = () => {
+const SignInForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const searchParams = useSearchParams();
@@ -31,7 +31,7 @@ const LoginForm: React.FC = () => {
       callbackURL: redirect,
       rememberMe: false,
     });
-    
+
     if (signInError) {
       setError(signInError.message || "Login failed");
       toast.error(signInError.message || "Login failed");
@@ -91,7 +91,9 @@ const LoginForm: React.FC = () => {
               LOG IN
             </h2>
 
-            <p className="text-sm text-muted-foreground mt-1">NestEdge Adoption</p>
+            <p className="text-sm text-muted-foreground mt-1">
+              NestEdge Adoption
+            </p>
           </div>
 
           {/* FORM */}
@@ -216,4 +218,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;
