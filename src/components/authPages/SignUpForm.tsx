@@ -58,14 +58,13 @@ const SignUpForm: React.FC = () => {
     if (password !== confirmPassword) {
       return setError("Passwords do not match.");
     }
-
-    const { error: signUpError } = await authClient.signUp.email({
+    const { data, error: signUpError } = await authClient.signUp.email({
       email,
       password,
       name,
       image: photo, // Better Auth uses 'image' instead of 'photo'
     });
-
+console.log("Sign Up Data:", data, signUpError);
     if (signUpError) {
       setError(signUpError.message || "Register failed");
       toast.error(signUpError.message || "Register failed");

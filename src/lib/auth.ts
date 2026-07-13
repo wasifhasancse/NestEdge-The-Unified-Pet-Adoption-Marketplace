@@ -10,7 +10,7 @@ if (!mongoUri) {
   console.warn("WARNING: MONGODB_URI is not defined in the environment.");
 }
 
-const client = new MongoClient(mongoUri || "mongodb://localhost:27017");
+const client = new MongoClient(mongoUri as string);
 const dbName = process.env.MONGODB_DATABASE_NAME || "Nest-Edge";
 export const db = client.db(dbName);
 
