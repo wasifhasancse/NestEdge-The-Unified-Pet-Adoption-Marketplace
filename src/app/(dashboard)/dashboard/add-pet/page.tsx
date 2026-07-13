@@ -1,5 +1,6 @@
 import AddPetForm from "@/components/dashboard/AddPetForm";
-import React from "react";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export const metadata = {
   title: "Add Pet | NestEdge",
@@ -7,7 +8,15 @@ export const metadata = {
     "Add a new pet for adoption on NestEdge. Share pet details, images, and adoption information to help pets find a loving home.",
 };
 
-const AddPetPage: React.FC = () => {
+const AddPetPage = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const authApi = await auth.api.getToken({
+    headers: await headers(),
+  });
+
   return (
     <section className="container mx-auto px-4 py-10">
       <div className="mb-8 space-y-3">
@@ -24,13 +33,17 @@ const AddPetPage: React.FC = () => {
         </h2>
 
         <p className="max-w-2xl text-muted-foreground text-base leading-relaxed">
-          Fill in your pet&apos;s information including breed, health, vaccination
-          status, adoption fee, and location to help potential adopters learn
-          more before sending a request.
+          Fill in your pet&apos;s information including breed, health,
+          vaccination status, adoption fee, and location to help potential
+          adopters learn more before sending a request.
         </p>
       </div>
 
-      <AddPetForm />
+      <AddPetForm
+        ownerEmail={session?.user?.email ?? ""}
+        ownerName={session?.user?.name ?? ""}
+        token={authApi?.token ?? ""}
+      />
       <div className="pointer-events-none fixed -bottom-24 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-[120px]" />
       <div className="pointer-events-none fixed top-32 left-24 h-72 w-72 rounded-full bg-chart-2/10 blur-[100px]" />
     </section>

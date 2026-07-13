@@ -21,10 +21,14 @@ export interface AdoptionRequest {
   petId: string;
   petName: string;
   petImage?: string;
+  ownerEmail?: string;
   userEmail: string;
   userName: string;
-  phoneNumber: string;
-  address: string;
+  userImage?: string;
+  phoneNumber?: string;
+  address?: string;
+  pickupDate?: string;
+  message?: string;
   notes?: string;
   status: "pending" | "approved" | "rejected";
   createdAt?: string;

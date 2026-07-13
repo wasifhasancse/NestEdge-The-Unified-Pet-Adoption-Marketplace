@@ -1,12 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, PawPrint } from "lucide-react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
+import Link from "next/link";
+import React, {
+    useEffect,
+    useRef,
+    useState,
+    useSyncExternalStore,
+} from "react";
 import type { Swiper as SwiperClass } from "swiper";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,7 +19,11 @@ import "swiper/css/pagination";
 const Banner: React.FC = () => {
   const swiperRef = useRef<SwiperClass | null>(null);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const [mounted, setMounted] = useState<boolean>(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   // Dark mode slider images
   const slidesDark = [
@@ -34,8 +43,6 @@ const Banner: React.FC = () => {
   ];
 
   useEffect(() => {
-    setMounted(true);
-
     const checkTheme = () => {
       const isDark = document.documentElement.classList.contains("dark");
       setIsDarkMode(isDark);
@@ -55,7 +62,9 @@ const Banner: React.FC = () => {
   const currentSlides = isDarkMode ? slidesDark : slidesLight;
 
   if (!mounted) {
-    return <section className="relative h-[70vh] md:h-[80vh] lg:h-screen w-full bg-background" />;
+    return (
+      <section className="relative h-[70vh] md:h-[80vh] lg:h-screen w-full bg-background" />
+    );
   }
 
   return (

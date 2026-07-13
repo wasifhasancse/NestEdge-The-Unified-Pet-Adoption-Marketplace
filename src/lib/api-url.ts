@@ -20,7 +20,7 @@ export const getApiBaseUrl = (): string => {
     return stripTrailingSlash(`https://${vercelUrl}`);
   }
 
-  return "http://localhost:3000";
+  return "http://localhost:5000";
 };
 
 export const buildApiUrl = (path: string): string => {

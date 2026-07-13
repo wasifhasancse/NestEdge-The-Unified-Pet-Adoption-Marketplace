@@ -65,7 +65,7 @@ const PetDetailAdoptForm: React.FC<PetDetailAdoptFormProps> = ({
       } else {
         toast.error("Something went wrong", { id: toastId });
       }
-    } catch (err) {
+    } catch {
       setLoading(false);
       toast.error("Network error. Please try again.", { id: toastId });
     }

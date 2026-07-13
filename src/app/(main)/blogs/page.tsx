@@ -1,19 +1,14 @@
-import React from "react";
 import {
-  Search,
-  Clock,
-  ArrowRight,
-  Heart,
-  MapPin,
-  Calendar,
-  ChevronRight,
+    ArrowRight,
+    Calendar,
+    ChevronRight,
+    Clock,
+    Heart,
+    MapPin,
+    Search,
 } from "lucide-react";
 import Image from "next/image";
-
-interface Author {
-  name: string;
-  avatar: string;
-}
+import React from "react";
 
 interface BlogPost {
   id: number;
@@ -35,7 +30,8 @@ const categories = [
 
 const featuredPost = {
   id: 1,
-  title: "From Stray to Soulmate: How Max Found His Forever Family Against All Odds",
+  title:
+    "From Stray to Soulmate: How Max Found His Forever Family Against All Odds",
   excerpt:
     "Found abandoned in a rainstorm, Max the Golden Retriever mix was terrified of everything. Read the heartwarming story of how patience, love, and a dedicated foster family transformed him into a certified therapy dog.",
   category: "Success Stories",
@@ -43,7 +39,8 @@ const featuredPost = {
   readTime: "6 min read",
   author: {
     name: "Sarah Jenkins",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
   },
   image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=1200",
 };
@@ -71,7 +68,8 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: 4,
-    title: "Decoding Cat Body Language: What Your Rescue Kitty is Trying to Tell You",
+    title:
+      "Decoding Cat Body Language: What Your Rescue Kitty is Trying to Tell You",
     excerpt:
       "A slow blink? A twitching tail? Cats communicate subtly. Learn how to read your new rescue cat's signals to make them feel safe and comfortable in their new home.",
     category: "Adoption Tips",

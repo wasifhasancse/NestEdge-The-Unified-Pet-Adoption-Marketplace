@@ -1,21 +1,21 @@
+import { Home, PawPrint } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Home, PawPrint } from "lucide-react";
 
-export default function NotFoundPage(): JSX.Element {
+export default function NotFoundPage() {
   const puppyImage =
     "https://lh3.googleusercontent.com/aida-public/AB6AXuDI8589hOsDqZiZNEC8bl8L2WUAfrD_6_B2K9fqsfp2wyX_tfbezP1JBugBHA_9cYR9rwgLT317GM39xZesmcnYjNrmE7G49Wr0KplkVA1Ti-GVrT-Pi2eADxuD_5ikr_ZMpvRRpnhPbmt_WIa6h8ZYp5FubCt-TyERTqpZzuf32y7ZWPQ4pUqEYibedXEyRoBkADuqJlEQ6a3bwbRETJzsrWAiVp_qpUi0D8QVoYDGMgFcuZgfqhFn_S7b7DbwzHBAaVmwPMCe52E";
 
   return (
     <main className="relative min-h-screen overflow-hidden bg-background flex items-center justify-center px-4 md:px-10 py-20">
       {/* Soft Background Glow */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-primary/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-white/20 via-transparent to-primary/5 pointer-events-none" />
 
       {/* Floating Polaroids */}
       <div className="absolute inset-0 z-10">
         {/* Left Card */}
-        <div className="absolute top-[10%] left-[2%] sm:left-[5%] w-32 sm:w-44 md:w-56 bg-card p-3 shadow-[0_20px_50px_rgba(0,0,0,0.08)] rotate-[-12deg] transition-all duration-500 hover:rotate-[-8deg] hover:scale-105">
-          <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+        <div className="absolute top-[10%] left-[2%] sm:left-[5%] w-32 sm:w-44 md:w-56 bg-card p-3 shadow-[0_20px_50px_rgba(0,0,0,0.08)] -rotate-12 transition-all duration-500 hover:-rotate-6 hover:scale-105">
+          <div className="relative w-full aspect-3/4 overflow-hidden rounded-sm">
             <Image
               src={puppyImage}
               alt="Lost Puppy"
@@ -32,7 +32,7 @@ export default function NotFoundPage(): JSX.Element {
 
         {/* Right Bottom Card */}
         <div className="absolute bottom-[12%] right-[3%] sm:right-[8%] w-36 sm:w-48 md:w-64 bg-card p-3 shadow-[0_20px_60px_rgba(0,0,0,0.12)] rotate-[8deg] transition-all duration-500 hover:rotate-[4deg] hover:scale-105">
-          <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+          <div className="relative w-full aspect-3/4 overflow-hidden rounded-sm">
             <Image
               src={puppyImage}
               alt="Lost Puppy"
@@ -47,8 +47,8 @@ export default function NotFoundPage(): JSX.Element {
         </div>
 
         {/* Background Blurred Card */}
-        <div className="absolute top-[18%] right-[12%] hidden md:block w-44 bg-card p-3 shadow-xl rotate-[-6deg] opacity-40 blur-[2px]">
-          <div className="relative w-full aspect-[3/4] overflow-hidden rounded-sm">
+        <div className="absolute top-[18%] right-[12%] hidden md:block w-44 bg-card p-3 shadow-xl -rotate-6 opacity-40 blur-[2px]">
+          <div className="relative w-full aspect-3/4 overflow-hidden rounded-sm">
             <Image
               src={puppyImage}
               alt="Background Puppy"

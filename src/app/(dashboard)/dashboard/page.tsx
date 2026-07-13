@@ -1,52 +1,56 @@
-import Link from "next/link";
-import Image from "next/image";
 import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
 import { getUserListing } from "@/lib/data/pets";
 import { getMyRequests, getPetRequestsByPetId } from "@/lib/data/requests";
+import { AdoptionRequest, Pet } from "@/types";
 import {
-  PawPrint,
-  HeartHandshake,
-  Send,
-  Sparkles,
-  Plus,
-  ArrowRight,
-  Clock,
-  Calendar,
-  User,
-  TrendingUp,
-  Inbox,
-  AlertCircle,
-  ChevronRight,
-  ClipboardList,
+    AlertCircle,
+    Calendar,
+    ChevronRight,
+    ClipboardList,
+    Clock,
+    HeartHandshake,
+    Inbox,
+    Lightbulb,
+    PawPrint,
+    Plus,
+    Send,
+    Sparkles,
+    TrendingUp,
+    User,
 } from "lucide-react";
-import React from "react";
-import { Pet, AdoptionRequest } from "@/types";
+import { headers } from "next/headers";
+import Image from "next/image";
+import Link from "next/link";
 
 const PET_CARE_TIPS = [
   {
     title: "Fresh Water First",
-    content: "Make sure to keep your pet hydrated, especially during warmer months. Always keep fresh, clean water accessible.",
+    content:
+      "Make sure to keep your pet hydrated, especially during warmer months. Always keep fresh, clean water accessible.",
     author: "NestEdge Health Team",
   },
   {
     title: "Daily Play & Exercise",
-    content: "Just 15-30 minutes of active play daily keeps your pet mentally stimulated, prevents obesity, and strengthens your bond.",
+    content:
+      "Just 15-30 minutes of active play daily keeps your pet mentally stimulated, prevents obesity, and strengthens your bond.",
     author: "Behavioral Expert",
   },
   {
     title: "Regular Vet Checkups",
-    content: "Preventive care is the best care. Schedule comprehensive checkups at least once a year to detect any health issues early.",
+    content:
+      "Preventive care is the best care. Schedule comprehensive checkups at least once a year to detect any health issues early.",
     author: "Veterinary Association",
   },
   {
     title: "Positive Reinforcement",
-    content: "Reward good behavior with treats, praise, or play. This builds mutual trust and makes learning fun for your companion.",
+    content:
+      "Reward good behavior with treats, praise, or play. This builds mutual trust and makes learning fun for your companion.",
     author: "Training Coach",
   },
   {
     title: "Grooming & Hygiene",
-    content: "Regular brushing helps distribute natural oils, prevents matting, and is the perfect chance to check for skin issues or pests.",
+    content:
+      "Regular brushing helps distribute natural oils, prevents matting, and is the perfect chance to check for skin issues or pests.",
     author: "Professional Groomer",
   },
 ];
@@ -79,7 +83,7 @@ export default async function DashboardHomePage() {
         const promises = listings.map((pet) =>
           getPetRequestsByPetId(pet._id || "", token)
             .then((res) => res || [])
-            .catch(() => [])
+            .catch(() => []),
         );
         const results = await Promise.all(promises);
         receivedRequests = results.flat().filter(Boolean) as AdoptionRequest[];
@@ -92,23 +96,31 @@ export default async function DashboardHomePage() {
 
   // Calculate metrics
   const totalListings = listings.length;
-  const activeListings = listings.filter((l) => l.status === "available").length;
+  const activeListings = listings.filter(
+    (l) => l.status === "available",
+  ).length;
   const adoptedListings = listings.filter((l) => l.status === "adopted").length;
 
   const totalReceived = receivedRequests.length;
-  const pendingReceived = receivedRequests.filter((r) => r.status === "pending").length;
-  const approvedReceived = receivedRequests.filter((r) => r.status === "approved").length;
+  const pendingReceived = receivedRequests.filter(
+    (r) => r.status === "pending",
+  ).length;
+  const approvedReceived = receivedRequests.filter(
+    (r) => r.status === "approved",
+  ).length;
 
   const totalSent = sentRequests.length;
   const pendingSent = sentRequests.filter((r) => r.status === "pending").length;
-  const approvedSent = sentRequests.filter((r) => r.status === "approved").length;
+  const approvedSent = sentRequests.filter(
+    (r) => r.status === "approved",
+  ).length;
 
   const successRate =
     totalListings > 0 ? Math.round((adoptedListings / totalListings) * 100) : 0;
 
   // Get a random tip based on current date so it remains stable for a day
   const tipIndex = Math.floor(
-    (new Date().getDate() + new Date().getMonth()) % PET_CARE_TIPS.length
+    (new Date().getDate() + new Date().getMonth()) % PET_CARE_TIPS.length,
   );
   const dailyTip = PET_CARE_TIPS[tipIndex];
 
@@ -176,12 +188,16 @@ export default async function DashboardHomePage() {
         {/* Quick listing stats bubble */}
         <div className="hidden xl:flex items-center gap-5 bg-muted/30 border border-border/60 p-4 rounded-2xl z-10 shrink-0">
           <div className="text-center">
-            <p className="text-xl font-bold text-foreground">{activeListings}</p>
+            <p className="text-xl font-bold text-foreground">
+              {activeListings}
+            </p>
             <p className="text-xs text-muted-foreground">Active Listings</p>
           </div>
           <div className="h-8 w-px bg-border/60" />
           <div className="text-center">
-            <p className="text-xl font-bold text-foreground">{pendingReceived}</p>
+            <p className="text-xl font-bold text-foreground">
+              {pendingReceived}
+            </p>
             <p className="text-xs text-muted-foreground">Pending Requests</p>
           </div>
           <div className="h-8 w-px bg-border/60" />
@@ -391,8 +407,8 @@ export default async function DashboardHomePage() {
                           request.status === "approved"
                             ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
                             : request.status === "rejected"
-                            ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
-                            : "bg-amber-500/10 text-amber-600 border-amber-500/20 animate-pulse"
+                              ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
+                              : "bg-amber-500/10 text-amber-600 border-amber-500/20 animate-pulse"
                         }`}
                       >
                         {request.status}
@@ -404,7 +420,8 @@ export default async function DashboardHomePage() {
                           🐾 {request.petName}
                         </span>
                         <span className="flex items-center gap-1 shrink-0">
-                          <Calendar size={11} /> {request.pickupDate || "No date"}
+                          <Calendar size={11} />{" "}
+                          {request.pickupDate || "No date"}
                         </span>
                       </div>
                       <Link href="/dashboard/my-listings" className="shrink-0">
@@ -513,8 +530,8 @@ export default async function DashboardHomePage() {
                           request.status === "approved"
                             ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/20"
                             : request.status === "rejected"
-                            ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
-                            : "bg-amber-500/10 text-amber-600 border-amber-500/20"
+                              ? "bg-rose-500/10 text-rose-600 border-rose-500/20"
+                              : "bg-amber-500/10 text-amber-600 border-amber-500/20"
                         }`}
                       >
                         {request.status}

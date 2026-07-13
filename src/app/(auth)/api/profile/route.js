@@ -25,14 +25,16 @@ export async function GET() {
     }
 
     // Strip sensitive fields
-    const { password, ...safeUser } = userDoc;
+    const safeUser = Object.fromEntries(
+      Object.entries(userDoc).filter(([key]) => key !== "password"),
+    );
 
     return NextResponse.json(safeUser);
   } catch (error) {
     console.error("Error in GET /api/profile:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -89,7 +91,7 @@ export async function PUT(req) {
     if (result.matchedCount === 0) {
       return NextResponse.json(
         { error: "User not found to update" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -99,7 +101,9 @@ export async function PUT(req) {
       updatedUserDoc = await db.collection("users").findOne({ email });
     }
 
-    const { password, ...safeUser } = updatedUserDoc;
+    const safeUser = Object.fromEntries(
+      Object.entries(updatedUserDoc).filter(([key]) => key !== "password"),
+    );
 
     return NextResponse.json({
       message: "Profile updated successfully",
@@ -109,7 +113,7 @@ export async function PUT(req) {
     console.error("Error in PUT /api/profile:", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

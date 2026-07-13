@@ -1,36 +1,39 @@
 "use client";
 
 import {
-  Menu,
-  NotebookPen,
-  User,
-  X,
-  LogOut,
-  LayoutDashboard,
-  ChevronDown,
-  PlusCircle,
-  Grid3X3,
-  Home,
-  ClipboardList,
+    ChevronDown,
+    ClipboardList,
+    Grid3X3,
+    Home,
+    LayoutDashboard,
+    LogOut,
+    Menu,
+    NotebookPen,
+    PlusCircle,
+    User,
+    X,
 } from "lucide-react";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
-import { ThemeSwitch } from "../ui/ThemeSwitch";
-import NavLinks from "../ui/NavLinks";
-import Link from "next/link";
-import { Button } from "@heroui/react";
-import { authClient } from "@/lib/auth-client";
-import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
-import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
 import { Loader } from "@/components/ui/Loader";
-import React from "react";
+import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
+import { authClient } from "@/lib/auth-client";
+import { Button } from "@heroui/react";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
+import NavLinks from "../ui/NavLinks";
+import { ThemeSwitch } from "../ui/ThemeSwitch";
 
 const Navbar: React.FC = () => {
   const pathname = usePathname();
 
-  const [mounted, setMounted] = useState<boolean>(false);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
   const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
@@ -38,10 +41,6 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!profileOpen) return;
@@ -362,14 +361,12 @@ const Navbar: React.FC = () => {
 
                     <Button
                       fullWidth
-                      color="danger"
-                      variant="flat"
                       onPress={() => {
                         setMobileMenuOpen(false);
                         handleLogout();
                       }}
                       isDisabled={isLoggingOut}
-                      className="h-11 rounded-xl font-medium text-sm transition-transform active:scale-[0.99]"
+                      className="h-11 rounded-xl bg-destructive/12 font-medium text-sm text-destructive transition-transform active:scale-[0.99] hover:bg-destructive/18"
                     >
                       {isLoggingOut ? (
                         <Loader size="inline" />
