@@ -125,17 +125,27 @@ export const getUserListing = async (
   email: string,
   token: string,
 ): Promise<Pet[]> => {
-  const res = await fetch(
-    buildApiUrl(`/listings?email=${encodeURIComponent(email)}`),
-    {
-      cache: "no-store",
-      headers: { authorization: `Bearer ${token}` },
-    },
-  );
+  try {
+    const res = await fetch(
+      buildApiUrl(`/listings?email=${encodeURIComponent(email)}`),
+      {
+        cache: "no-store",
+        headers: { authorization: `Bearer ${token}` },
+      },
+    );
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch listings");
+    if (!res.ok) {
+      return [];
+    }
+
+    const contentType = res.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      return [];
+    }
+
+    const data = await res.json();
+    return Array.isArray(data) ? data.filter(isPet) : [];
+  } catch {
+    return [];
   }
-
-  return await res.json();
 };
