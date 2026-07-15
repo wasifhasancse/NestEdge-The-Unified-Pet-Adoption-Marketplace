@@ -1,16 +1,16 @@
 "use client";
 
 import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Cell,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
+    Bar,
+    BarChart,
+    CartesianGrid,
+    Cell,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
 } from "recharts";
 
 interface DashboardAnalyticsChartProps {
@@ -85,7 +85,11 @@ export default function DashboardAnalyticsChart({
                   axisLine={false}
                   tick={{ fontSize: 12 }}
                 />
-                <YAxis allowDecimals={false} tickLine={false} axisLine={false} />
+                <YAxis
+                  allowDecimals={false}
+                  tickLine={false}
+                  axisLine={false}
+                />
                 <Tooltip
                   cursor={{ fill: "rgba(13, 148, 136, 0.08)" }}
                   contentStyle={tooltipStyle}
@@ -132,8 +136,14 @@ export default function DashboardAnalyticsChart({
 
           <div className="mt-2 grid grid-cols-3 gap-2 text-center text-xs">
             {requestStatusData.map((item, index) => (
-              <div key={item.name} className="rounded-xl border border-border/70 bg-card p-2">
-                <p className="font-semibold" style={{ color: PIE_COLORS[index] }}>
+              <div
+                key={item.name}
+                className="rounded-xl border border-border/70 bg-card p-2"
+              >
+                <p
+                  className="font-semibold"
+                  style={{ color: PIE_COLORS[index] }}
+                >
                   {item.name}
                 </p>
                 <p className="mt-0.5 text-foreground">{item.value}</p>

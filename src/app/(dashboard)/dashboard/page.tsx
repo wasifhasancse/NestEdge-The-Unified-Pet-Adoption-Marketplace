@@ -1,8 +1,8 @@
+import DashboardAnalyticsChart from "@/components/dashboard/DashboardAnalyticsChart";
 import { auth } from "@/lib/auth";
 import { getUserListing } from "@/lib/data/pets";
 import { getMyRequests, getPetRequestsByPetId } from "@/lib/data/requests";
 import { AdoptionRequest, Pet } from "@/types";
-import DashboardAnalyticsChart from "@/components/dashboard/DashboardAnalyticsChart";
 import {
     AlertCircle,
     Calendar,
