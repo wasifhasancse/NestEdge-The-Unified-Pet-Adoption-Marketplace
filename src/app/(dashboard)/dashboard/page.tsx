@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { getUserListing } from "@/lib/data/pets";
 import { getMyRequests, getPetRequestsByPetId } from "@/lib/data/requests";
 import { AdoptionRequest, Pet } from "@/types";
+import DashboardAnalyticsChart from "@/components/dashboard/DashboardAnalyticsChart";
 import {
     AlertCircle,
     Calendar,
@@ -107,6 +108,9 @@ export default async function DashboardHomePage() {
   ).length;
   const approvedReceived = receivedRequests.filter(
     (r) => r.status === "approved",
+  ).length;
+  const rejectedReceived = receivedRequests.filter(
+    (r) => r.status === "rejected",
   ).length;
 
   const totalSent = sentRequests.length;
@@ -319,6 +323,16 @@ export default async function DashboardHomePage() {
           </div>
         </div>
       </div>
+
+      <DashboardAnalyticsChart
+        totalListings={totalListings}
+        activeListings={activeListings}
+        adoptedListings={adoptedListings}
+        totalReceived={totalReceived}
+        pendingReceived={pendingReceived}
+        approvedReceived={approvedReceived}
+        rejectedReceived={rejectedReceived}
+      />
 
       {/* TWO COLUMN CONTENT LAYOUT */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5">
