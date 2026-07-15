@@ -1,11 +1,11 @@
 "use client";
 
+import { buildApiUrl } from "@/lib/api-url";
+import { authClient } from "@/lib/auth-client";
+import { AlertTriangle, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { Trash2, X, AlertTriangle } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
-import { buildApiUrl } from "@/lib/api-url";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 interface DeleteListingModalProps {
@@ -40,21 +40,36 @@ export default function DeleteListingModal({
       const { data: tokenData } = await authClient.token();
       const token = tokenData?.token;
 
+      if (!token) {
+        throw new Error("Your session has expired. Please sign in again.");
+      }
+
       const res = await fetch(buildApiUrl(`/pets/${petId}`), {
         method: "DELETE",
         headers: { authorization: `Bearer ${token}` },
       });
 
       if (!res.ok) {
-        toast.error("Failed to delete listing", { id: toastId });
+        const data = (await res.json().catch(() => null)) as {
+          error?: string;
+          message?: string;
+        } | null;
+        toast.error(
+          data?.error || data?.message || "Failed to delete listing",
+          {
+            id: toastId,
+          },
+        );
         return;
       }
       toast.success("Listing deleted successfully 🐾", { id: toastId });
       setOpen(false);
 
       router.refresh();
-    } catch {
-      toast.error("Something went wrong", { id: toastId });
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error ? error.message : "Something went wrong";
+      toast.error(message, { id: toastId });
     }
   };
 
@@ -106,7 +121,7 @@ export default function DeleteListingModal({
               {/* Body */}
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground text-center">
                 This action will permanently delete{" "}
-                <span className="font-bold text-foreground text-primary">
+                <span className="font-bold text-primary">
                   {petName || "this pet listing"}
                 </span>{" "}
                 and all its data. You can’t undo this action.

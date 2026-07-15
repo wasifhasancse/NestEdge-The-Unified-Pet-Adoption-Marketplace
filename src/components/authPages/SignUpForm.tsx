@@ -3,13 +3,13 @@
 import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
 import { authClient } from "@/lib/auth-client";
 import {
-  Eye,
-  EyeOff,
-  ImageIcon,
-  Lock,
-  Mail,
-  PawPrint,
-  User,
+    Eye,
+    EyeOff,
+    ImageIcon,
+    Lock,
+    Mail,
+    PawPrint,
+    User,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,13 +58,12 @@ const SignUpForm: React.FC = () => {
     if (password !== confirmPassword) {
       return setError("Passwords do not match.");
     }
-    const { data, error: signUpError } = await authClient.signUp.email({
+    const { error: signUpError } = await authClient.signUp.email({
       email,
       password,
       name,
       image: photo, // Better Auth uses 'image' instead of 'photo'
     });
-console.log("Sign Up Data:", data, signUpError);
     if (signUpError) {
       setError(signUpError.message || "Register failed");
       toast.error(signUpError.message || "Register failed");
@@ -96,7 +95,7 @@ console.log("Sign Up Data:", data, signUpError);
 
           <div className="mt-10 w-full max-w-87.5">
             <Image
-              src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1580144971870-8eca5944f022"
               alt="Dog and Cat"
               width={500}
               height={500}
@@ -202,7 +201,7 @@ console.log("Sign Up Data:", data, signUpError);
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
                 >
                   {showPassword ? (
                     <Eye className="w-5 h-5" />
@@ -233,7 +232,7 @@ console.log("Sign Up Data:", data, signUpError);
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
                 >
                   {showConfirmPassword ? (
                     <Eye className="w-5 h-5" />
@@ -252,7 +251,7 @@ console.log("Sign Up Data:", data, signUpError);
             {/* REGISTER BUTTON */}
             <button
               type="submit"
-              className="w-full h-12 rounded-full cursor-pointer bg-primary hover:opacity-90 text-primary-foreground font-bold tracking-wide shadow-md transition-all duration-200 flex items-center justify-center gap-2 mt-2"
+              className="btn-primary w-full h-12 rounded-full mt-2"
             >
               REGISTER NOW
               <PawPrint className="w-4 h-4" fill="currentColor" />
@@ -288,7 +287,7 @@ console.log("Sign Up Data:", data, signUpError);
             <p className="text-sm text-foreground">
               Already have an account?{" "}
               <Link
-                href="/login"
+                href="/signin"
                 className="text-primary font-semibold hover:underline"
               >
                 Login Here

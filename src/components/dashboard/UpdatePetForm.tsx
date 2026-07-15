@@ -80,7 +80,13 @@ const UpdatePetForm: React.FC<UpdatePetFormProps> = ({ pet, token }) => {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update the pet listing");
+        const data = (await response.json().catch(() => null)) as {
+          error?: string;
+          message?: string;
+        } | null;
+        throw new Error(
+          data?.error || data?.message || "Failed to update the pet listing",
+        );
       }
 
       toast.success("Pet listing updated successfully.", { id: toastId });

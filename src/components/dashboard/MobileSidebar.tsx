@@ -1,20 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
+import {
+    CirclePlus,
+    ClipboardList,
+    HeartHandshake,
+    Home,
+    LogOut,
+    Menu,
+    PawPrint,
+    User,
+    X,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  Menu,
-  X,
-  Home,
-  ClipboardList,
-  CirclePlus,
-  PawPrint,
-  LogOut,
-  User,
-} from "lucide-react";
-import React from "react";
-import { authClient } from "@/lib/auth-client";
+import React, { useState } from "react";
 import NestEdgeLogo from "../ui/NestEdgeLogo";
 
 interface SidebarLink {
@@ -40,6 +40,11 @@ export default function MobileSidebar() {
       icon: ClipboardList,
     },
     {
+      href: "/dashboard/adoption-requests",
+      label: "Adoption Requests",
+      icon: HeartHandshake,
+    },
+    {
       href: "/dashboard/add-pet",
       label: "Add Pet",
       icon: CirclePlus,
@@ -60,7 +65,7 @@ export default function MobileSidebar() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/login");
+          router.push("/signin");
           router.refresh();
         },
       },
@@ -72,7 +77,7 @@ export default function MobileSidebar() {
       {/* MENU BUTTON */}
       <button
         onClick={() => setOpen(true)}
-        className="rounded-xl p-2 transition-colors hover:bg-muted cursor-pointer"
+        className="rounded-xl p-2 transition-colors hover:bg-muted"
       >
         <Menu size={24} />
       </button>
@@ -104,7 +109,7 @@ export default function MobileSidebar() {
 
           <button
             onClick={() => setOpen(false)}
-            className="rounded-lg p-2 hover:bg-muted cursor-pointer"
+            className="rounded-lg p-2 hover:bg-muted"
           >
             <X className="h-5 w-5" />
           </button>
@@ -141,7 +146,7 @@ export default function MobileSidebar() {
         <div className="absolute bottom-0 w-full border-t border-border p-4">
           <button
             onClick={handleLogout}
-            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-destructive transition-all duration-200 hover:bg-destructive/10 cursor-pointer"
+            className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-destructive transition-all duration-200 hover:bg-destructive/10"
           >
             <LogOut className="h-5 w-5" />
             <span className="font-medium">Logout</span>

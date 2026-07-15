@@ -1,12 +1,12 @@
 "use client";
 
+import { buildApiUrl } from "@/lib/api-url";
+import { authClient } from "@/lib/auth-client";
+import { AdoptionRequest } from "@/types";
+import { AlertTriangle, Trash2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { Trash2, X, AlertTriangle } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
-import { buildApiUrl } from "@/lib/api-url";
-import { AdoptionRequest } from "@/types";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 interface DeleteRequestProps {
@@ -38,6 +38,10 @@ export function DeleteRequest({ request }: DeleteRequestProps) {
       const { data: tokenData } = await authClient.token();
       const token = tokenData?.token;
 
+      if (!token) {
+        throw new Error("Your session has expired. Please sign in again.");
+      }
+
       const res = await fetch(buildApiUrl(`/requests/${id}`), {
         method: "DELETE",
         headers: {
@@ -45,15 +49,24 @@ export function DeleteRequest({ request }: DeleteRequestProps) {
         },
       });
 
-      const data = (await res.json()) as { deletedCount?: number };
+      const data = (await res.json().catch(() => null)) as {
+        deletedCount?: number;
+        message?: string;
+        error?: string;
+      } | null;
 
-      if (data.deletedCount) {
+      if (res.ok && data?.deletedCount) {
         toast.success("Request Cancelled successfully 🐾", { id: toastId });
         setOpen(false);
 
         router.refresh();
       } else {
-        toast.error("Failed to cancel request", { id: toastId });
+        toast.error(
+          data?.error || data?.message || "Failed to cancel request",
+          {
+            id: toastId,
+          },
+        );
       }
     } catch (error: unknown) {
       console.error(error);
@@ -109,7 +122,7 @@ export function DeleteRequest({ request }: DeleteRequestProps) {
               {/* Message Details */}
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground text-center">
                 Are you sure you want to cancel your adoption request for{" "}
-                <span className="font-bold text-foreground text-primary">
+                <span className="font-bold text-primary">
                   {request?.petName}
                 </span>
                 ? This action cannot be undone and will remove your application

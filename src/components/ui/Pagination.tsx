@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
 
 interface PaginationProps {
   totalPages: number;
@@ -11,7 +11,7 @@ interface PaginationProps {
 const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   // Get current page from URL, default to 1
   const currentPage = Number(searchParams.get("page")) || 1;
   const [goToValue, setGoToValue] = useState<string>("");
@@ -59,7 +59,10 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
     return pages.map((page, index) => {
       if (page === "...") {
         return (
-          <span key={`ellipsis-${index}`} className="text-muted-foreground px-1">
+          <span
+            key={`ellipsis-${index}`}
+            className="text-muted-foreground px-1"
+          >
             ...
           </span>
         );
@@ -71,7 +74,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
         <button
           key={page}
           onClick={() => handlePageChange(page as number)}
-          className={`w-10 h-10 flex items-center justify-center rounded-full transition-all font-medium text-sm cursor-pointer ${
+          className={`w-10 h-10 flex items-center justify-center rounded-full transition-all font-medium text-sm ${
             isSelected
               ? "bg-primary text-primary-foreground shadow-md scale-110"
               : "text-muted-foreground hover:bg-secondary hover:text-foreground"
@@ -92,7 +95,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition cursor-pointer"
+          className="text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -106,13 +109,16 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition cursor-pointer"
+          className="text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:pointer-events-none transition"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
 
         {/* Go To Page Input */}
-        <form onSubmit={handleGoToSubmit} className="flex items-center gap-2 ml-4 border-l pl-4 border-border text-sm text-muted-foreground">
+        <form
+          onSubmit={handleGoToSubmit}
+          className="flex items-center gap-2 ml-4 border-l pl-4 border-border text-sm text-muted-foreground"
+        >
           <span>Go to</span>
           <input
             type="number"

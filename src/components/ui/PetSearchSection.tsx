@@ -1,11 +1,11 @@
 "use client";
 
 import {
-  Search,
-  FilterX,
-  PawPrint,
-  Calendar,
-  VenusAndMars,
+    Calendar,
+    FilterX,
+    PawPrint,
+    Search,
+    VenusAndMars,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -19,7 +19,14 @@ const PetSearchSection: React.FC = () => {
   const [gender, setGender] = useState<string>("");
 
   // SINGLE SOURCE OF TRUTH FOR QUERY
-  const buildAndPush = (next: { search?: string; species?: string; age?: string; gender?: string } = {}) => {
+  const buildAndPush = (
+    next: {
+      search?: string;
+      species?: string;
+      age?: string;
+      gender?: string;
+    } = {},
+  ) => {
     const params = new URLSearchParams();
 
     const finalSearch = next.search ?? search;
@@ -55,7 +62,8 @@ const PetSearchSection: React.FC = () => {
             </span>
           </h1>
           <p className="max-w-md mx-auto text-base md:text-lg text-muted-foreground font-medium">
-            Browse through hundreds of adorable pets waiting for a cozy NestEdge home.
+            Browse through hundreds of adorable pets waiting for a cozy NestEdge
+            home.
           </p>
         </div>
 
@@ -79,7 +87,7 @@ const PetSearchSection: React.FC = () => {
 
             <button
               onClick={handleSearch}
-              className="h-14 px-8 font-semibold rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/95 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="btn-primary h-14 rounded-2xl px-8"
             >
               <Search className="w-4 h-4" />
               Search
@@ -175,7 +183,7 @@ const PetSearchSection: React.FC = () => {
                 setGender("");
                 router.push("/all-pets");
               }}
-              className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-destructive hover:text-destructive/80 transition-colors ml-auto sm:ml-0 group py-1 cursor-pointer bg-transparent border-none outline-none"
+              className="btn-secondary ml-auto sm:ml-0 h-10 rounded-full border-destructive/20 px-4 py-2 text-xs font-bold uppercase tracking-wider text-destructive hover:bg-destructive/5"
             >
               <FilterX className="w-4 h-4 group-hover:scale-110 transition-transform" />
               Clear All Filters

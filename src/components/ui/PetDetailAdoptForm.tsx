@@ -24,6 +24,12 @@ const PetDetailAdoptForm: React.FC<PetDetailAdoptFormProps> = ({
 
   const handleAdopt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!token) {
+      toast.error("Please sign in to send an adoption request.");
+      return;
+    }
+
     setLoading(true);
     const toastId = toast.loading("Sending adoption request...");
     const formData = new FormData(e.currentTarget);
@@ -56,14 +62,20 @@ const PetDetailAdoptForm: React.FC<PetDetailAdoptFormProps> = ({
         body: JSON.stringify(adoptionData),
       });
 
-      const data = await res.json();
+      const data = (await res.json().catch(() => null)) as {
+        insertedId?: string;
+        error?: string;
+        message?: string;
+      } | null;
       setLoading(false);
 
-      if (data.insertedId) {
+      if (res.ok && data?.insertedId) {
         toast.success("Adoption request sent! 🐾", { id: toastId });
         setIsSubmitted(true); // hide form
       } else {
-        toast.error("Something went wrong", { id: toastId });
+        toast.error(data?.error || data?.message || "Something went wrong", {
+          id: toastId,
+        });
       }
     } catch {
       setLoading(false);
@@ -170,7 +182,7 @@ const PetDetailAdoptForm: React.FC<PetDetailAdoptFormProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-14 rounded-2xl bg-primary cursor-pointer text-primary-foreground font-bold shadow-md hover:opacity-90 hover:scale-[0.99] transition-all duration-200"
+            className="btn-primary w-full h-14 rounded-2xl"
           >
             {loading ? "Sending..." : "Send Adoption Request"}
           </button>

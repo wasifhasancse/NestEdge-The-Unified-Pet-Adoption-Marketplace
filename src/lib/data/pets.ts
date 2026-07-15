@@ -76,11 +76,13 @@ export const getAllPets = async (
 
 export const getPetById = async (
   petId: string,
-  token: string,
+  token?: string,
 ): Promise<Pet | null> => {
   try {
+    const headers = token ? { authorization: `Bearer ${token}` } : undefined;
+
     const res = await fetch(buildApiUrl(`/pets/${petId}`), {
-      headers: { authorization: `Bearer ${token}` },
+      headers,
       cache: "no-store",
     });
 

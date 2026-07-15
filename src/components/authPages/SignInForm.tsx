@@ -69,7 +69,7 @@ const SignInForm: React.FC = () => {
 
           <div className="mt-10 w-full max-w-87.5">
             <Image
-              src="https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1778437968220-67c986897890"
               alt="Dog and Cat"
               width={500}
               height={500}
@@ -137,7 +137,7 @@ const SignInForm: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary"
                 >
                   {showPassword ? (
                     <Eye className="w-5 h-5" />
@@ -156,7 +156,7 @@ const SignInForm: React.FC = () => {
             <div className="text-right">
               <button
                 type="button"
-                className="text-sm text-primary hover:underline cursor-pointer bg-transparent border-none outline-none"
+                className="btn-secondary px-0 py-0 text-sm text-primary hover:bg-transparent"
               >
                 Forgot Password?
               </button>
@@ -165,7 +165,7 @@ const SignInForm: React.FC = () => {
             {/* LOGIN BUTTON */}
             <button
               type="submit"
-              className="w-full h-12 rounded-full cursor-pointer bg-primary hover:opacity-90 text-primary-foreground font-bold tracking-wide shadow-md transition-all duration-200 flex items-center justify-center gap-2"
+              className="btn-primary w-full h-12 rounded-full"
             >
               LOG IN NOW
               <PawPrint className="w-4 h-4" fill="currentColor" />
@@ -186,7 +186,7 @@ const SignInForm: React.FC = () => {
           {/* SOCIAL LOGIN */}
           <div className="flex justify-center gap-5">
             {/* FACEBOOK */}
-            <button className="w-12 h-12 rounded-full cursor-pointer bg-[#1877F2] flex items-center justify-center shadow-md hover:scale-105 transition-transform">
+            <button className="btn-secondary h-12 w-12 rounded-full p-0 bg-[#1877F2] text-white hover:bg-[#1877F2]">
               <FaFacebook className="w-5 h-5 fill-white" />
             </button>
 
@@ -194,7 +194,7 @@ const SignInForm: React.FC = () => {
             <button
               type="button"
               onClick={handleSocialSignIn}
-              className="w-12 h-12 rounded-full cursor-pointer bg-[#ffffff] border border-border flex items-center justify-center shadow-sm hover:bg-muted transition-colors"
+              className="btn-secondary h-12 w-12 rounded-full p-0"
             >
               <FcGoogle className="w-5 h-5" />
             </button>
@@ -206,7 +206,7 @@ const SignInForm: React.FC = () => {
               New to NestEdge?{" "}
               <Link
                 href="/signup"
-                className="text-primary font-semibold hover:underline cursor-pointer"
+                className="text-primary font-semibold hover:underline"
               >
                 Register Here
               </Link>

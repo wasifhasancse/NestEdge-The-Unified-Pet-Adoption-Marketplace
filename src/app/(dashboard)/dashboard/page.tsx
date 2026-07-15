@@ -337,7 +337,7 @@ export default async function DashboardHomePage() {
                 </p>
               </div>
               <Link
-                href="/dashboard/my-listings"
+                href="/dashboard/adoption-requests"
                 className="text-xs font-semibold text-primary hover:underline flex items-center gap-1 shrink-0"
               >
                 Manage <ChevronRight size={14} />
@@ -424,7 +424,10 @@ export default async function DashboardHomePage() {
                           {request.pickupDate || "No date"}
                         </span>
                       </div>
-                      <Link href="/dashboard/my-listings" className="shrink-0">
+                      <Link
+                        href="/dashboard/adoption-requests"
+                        className="shrink-0"
+                      >
                         <button className="text-xs font-semibold border border-border hover:bg-muted text-foreground px-2.5 py-1 rounded-lg transition duration-200 cursor-pointer">
                           Action
                         </button>

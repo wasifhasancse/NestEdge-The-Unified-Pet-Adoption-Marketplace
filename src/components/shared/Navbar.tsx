@@ -5,10 +5,12 @@ import {
     ClipboardList,
     Grid3X3,
     Home,
+    Info,
     LayoutDashboard,
     LogOut,
     Menu,
     NotebookPen,
+    PhoneCall,
     PlusCircle,
     User,
     X,
@@ -55,7 +57,7 @@ const Navbar: React.FC = () => {
       await authClient.signOut({
         fetchOptions: {
           onSuccess: () => {
-            router.push("/login");
+            router.push("/signin");
             router.refresh();
           },
         },
@@ -108,6 +110,22 @@ const Navbar: React.FC = () => {
                 label="Blogs"
                 currentPath={pathname}
                 targetPath="/blogs"
+              />
+            </NavLinks>
+            <NavLinks href="/about">
+              <MobileMenuLinkIcon
+                icon={Info}
+                label="About"
+                currentPath={pathname}
+                targetPath="/about"
+              />
+            </NavLinks>
+            <NavLinks href="/contact">
+              <MobileMenuLinkIcon
+                icon={PhoneCall}
+                label="Contact"
+                currentPath={pathname}
+                targetPath="/contact"
               />
             </NavLinks>
             {user && (
@@ -234,7 +252,7 @@ const Navbar: React.FC = () => {
             ) : (
               <Link
                 href="/signin"
-                className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background font-medium text-sm hover:bg-foreground/90 active:scale-[0.98] hover:shadow-lg hover:shadow-foreground/5 transition-all duration-200"
+                className="hidden md:inline-flex btn-secondary px-4 py-2"
               >
                 <User size={15} />
                 <span>Sign In</span>
@@ -291,6 +309,22 @@ const Navbar: React.FC = () => {
                     label="Blogs"
                     currentPath={pathname}
                     targetPath="/blogs"
+                  />
+                </NavLinks>
+                <NavLinks href="/about">
+                  <MobileMenuLinkIcon
+                    icon={Info}
+                    label="About"
+                    currentPath={pathname}
+                    targetPath="/about"
+                  />
+                </NavLinks>
+                <NavLinks href="/contact">
+                  <MobileMenuLinkIcon
+                    icon={PhoneCall}
+                    label="Contact"
+                    currentPath={pathname}
+                    targetPath="/contact"
                   />
                 </NavLinks>
 
@@ -377,10 +411,10 @@ const Navbar: React.FC = () => {
                     </Button>
                   </div>
                 ) : (
-                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Link href="/signin" onClick={() => setMobileMenuOpen(false)}>
                     <Button
                       fullWidth
-                      className="h-11 rounded-xl font-medium text-sm bg-foreground text-background shadow-sm hover:bg-foreground/90 transition-all"
+                      className="btn-secondary h-11 rounded-xl px-4 py-0 text-sm font-medium"
                     >
                       <User className="w-4 h-4" />
                       <span>Login</span>
@@ -415,7 +449,7 @@ const MenuLinkIcon: React.FC<MenuLinkIconProps> = ({
   const active = isActive || currentPath === targetPath;
   return (
     <div
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
+      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
         active
           ? "bg-primary text-primary-foreground shadow-sm shadow-primary/20"
           : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
@@ -438,7 +472,7 @@ const MobileMenuLinkIcon: React.FC<MenuLinkIconProps> = ({
   const active = isActive || currentPath === targetPath;
   return (
     <div
-      className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
+      className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
         active
           ? "bg-primary/10 text-primary"
           : "hover:bg-muted/50 text-muted-foreground hover:text-foreground"

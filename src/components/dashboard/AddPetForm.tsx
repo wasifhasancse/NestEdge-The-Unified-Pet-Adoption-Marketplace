@@ -44,10 +44,17 @@ const AddPetForm: React.FC<AddPetFormProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+
+    if (!token) {
+      toast.error("Your session has expired. Please sign in again.");
+      return;
+    }
+
     setIsSubmitting(true);
     const toastId = toast.loading("Creating pet listing...");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const petData = {
       petName: String(formData.get("petName") || "").trim(),
       breed: String(formData.get("breed") || "").trim(),
@@ -75,15 +82,25 @@ const AddPetForm: React.FC<AddPetFormProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create pet listing");
+        const data = (await response.json().catch(() => null)) as {
+          error?: string;
+          message?: string;
+        } | null;
+        throw new Error(
+          data?.error || data?.message || "Failed to create pet listing",
+        );
       }
 
-      event.currentTarget.reset();
+      form.reset();
       toast.success("Pet listing created successfully.", { id: toastId });
       router.refresh();
       router.push("/dashboard/my-listings");
-    } catch {
-      toast.error("Unable to create the pet listing right now.", {
+    } catch (error: unknown) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to create the pet listing right now.";
+      toast.error(message, {
         id: toastId,
       });
     } finally {

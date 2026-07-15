@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { Loader } from "@/components/ui/Loader";
+import { buildApiUrl } from "@/lib/api-url";
+import { authClient } from "@/lib/auth-client";
+import { getPetRequestsByPetId } from "@/lib/data/requests";
+import { AdoptionRequest } from "@/types";
 import { Rocket } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
 import { Users } from "lucide-react";
-import { authClient } from "@/lib/auth-client";
-import { buildApiUrl } from "@/lib/api-url";
-import { AdoptionRequest } from "@/types";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { getPetRequestsByPetId } from "@/lib/data/requests";
-import { Loader } from "@/components/ui/Loader";
 
 interface RequestsModalProps {
   petId: string;
@@ -69,7 +69,10 @@ export function RequestsModal({ petId }: RequestsModalProps) {
         body: JSON.stringify({ status }),
       });
 
-      const data = (await res.json()) as { message?: string };
+      const data = (await res.json().catch(() => null)) as {
+        message?: string;
+        error?: string;
+      } | null;
 
       if (res.ok) {
         await getPetRequests(petId);
@@ -77,9 +80,12 @@ export function RequestsModal({ petId }: RequestsModalProps) {
         const emoji = status === "approved" ? "✅" : "❌";
         toast.success(`Request ${status} ${emoji}`, { id: toastId });
       } else {
-        toast.error(data.message || "Failed to update request", {
-          id: toastId,
-        });
+        toast.error(
+          data?.error || data?.message || "Failed to update request",
+          {
+            id: toastId,
+          },
+        );
       }
     } catch {
       toast.error("Something went wrong", { id: toastId });

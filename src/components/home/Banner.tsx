@@ -27,19 +27,20 @@ const Banner: React.FC = () => {
 
   // Dark mode slider images
   const slidesDark = [
-    "https://i.pinimg.com/1200x/84/72/07/847207d8a2944b8781c469d158356bf2.jpg",
-    "https://i.pinimg.com/1200x/cc/60/38/cc60387422f0c8001f7fa1467520a8d4.jpg",
-    "https://i.pinimg.com/1200x/04/a9/6b/04a96ba0d8c310fc9d4b7f61d6054351.jpg",
-    "https://i.pinimg.com/1200x/6c/87/f1/6c87f15eccddb72ae647d37c466ab331.jpg",
-    "https://i.pinimg.com/1200x/c2/62/cb/c262cb8824ffa3eb7376b6646aab52cb.jpg",
+    "https://images.unsplash.com/photo-1708097672571-3d30ef56fe74",
+    "https://images.unsplash.com/photo-1761850506365-90f8dcf5db77",
+    "https://images.unsplash.com/photo-1737915235106-6dbc4b1bcc4f",
+    "https://images.unsplash.com/photo-1512027792141-80e5842b87c8",
+    "https://images.unsplash.com/photo-1728118257046-df9728875eb2",
   ];
 
   // Light mode slider images
   const slidesLight = [
-    "https://images.unsplash.com/photo-1731650211720-54d314975a7b?q=80&w=1635&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://i.pinimg.com/1200x/a0/ba/04/a0ba04d48b6c7c57f903794c50f56c7a.jpg",
-    "https://i.pinimg.com/webp/1200x/56/93/58/56935880b1408ada3e578d242bf521ce.webp",
-    "https://images.unsplash.com/photo-1468190919318-dda40b332156?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1560114928-40f1f1eb26a0",
+    "https://images.unsplash.com/photo-1663127046003-ef3ec7ce7bc4",
+    "https://images.unsplash.com/photo-1664371675060-87e49122263c",
+    "https://images.unsplash.com/photo-1565712546991-158cb3885821",
+    "https://images.unsplash.com/photo-1696334137510-5025957ef28e"
   ];
 
   useEffect(() => {

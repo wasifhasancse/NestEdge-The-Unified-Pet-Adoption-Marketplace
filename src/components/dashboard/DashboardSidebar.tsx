@@ -1,17 +1,18 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
+import {
+    CirclePlus,
+    ClipboardList,
+    HeartHandshake,
+    Home,
+    LogOut,
+    PawPrint,
+    User,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  PawPrint,
-  ClipboardList,
-  CirclePlus,
-  Home,
-  LogOut,
-  User,
-} from "lucide-react";
 import React from "react";
-import { authClient } from "@/lib/auth-client";
 
 interface SidebarLink {
   href: string;
@@ -35,6 +36,11 @@ export default function DashboardSidebar() {
       icon: ClipboardList,
     },
     {
+      href: "/dashboard/adoption-requests",
+      label: "Adoption Requests",
+      icon: HeartHandshake,
+    },
+    {
       href: "/dashboard/add-pet",
       label: "Add Pet",
       icon: CirclePlus,
@@ -55,7 +61,7 @@ export default function DashboardSidebar() {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/login");
+          router.push("/signin");
         },
       },
     });
@@ -96,7 +102,7 @@ export default function DashboardSidebar() {
       <div className="border-t border-border p-4">
         <button
           onClick={handleLogout}
-          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-destructive transition-all duration-200 hover:bg-destructive/10 cursor-pointer"
+          className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-destructive transition-all duration-200 hover:bg-destructive/10"
         >
           <LogOut className="h-5 w-5" />
           <span className="font-medium">Logout</span>

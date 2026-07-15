@@ -1,7 +1,7 @@
+import { Pet } from "@/types";
 import { BadgeCheck, MapPin, MoveRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { Pet } from "@/types";
 
 interface PetDetailPageContentProps {
   pet: Pet;
@@ -137,7 +137,7 @@ const PetDetailPageContent: React.FC<PetDetailPageContentProps> = ({ pet }) => {
 
               <p className="text-sm text-muted-foreground">{ownerEmail}</p>
 
-              <button className="mt-2 flex items-center gap-1 text-sm text-primary font-semibold hover:underline cursor-pointer bg-transparent border-none">
+              <button className="btn-secondary mt-2 px-0 py-0 text-sm text-primary font-semibold hover:bg-transparent">
                 View Profile
                 <MoveRight className="w-4 h-4" />
               </button>
@@ -154,9 +154,9 @@ const PetDetailPageContent: React.FC<PetDetailPageContentProps> = ({ pet }) => {
           </h2>
 
           <p className="mt-4 text-muted-foreground leading-7 text-sm">
-            Adopting {petName} means more than just bringing home a pet; it&apos;s a
-            lifetime commitment of love and companionship. Our team ensures a
-            smooth transition for both of you.
+            Adopting {petName} means more than just bringing home a pet;
+            it&apos;s a lifetime commitment of love and companionship. Our team
+            ensures a smooth transition for both of you.
           </p>
         </div>
 

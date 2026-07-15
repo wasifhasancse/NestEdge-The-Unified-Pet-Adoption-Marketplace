@@ -14,16 +14,24 @@ interface PageProps {
 const PetDetailsPage = async ({ params }: PageProps) => {
   const { petId } = await params;
 
-  const authApi = await auth.api.getToken({
-    headers: await headers(),
-  });
-  const token = authApi?.token || "";
+  const requestHeaders = await headers();
 
-  const pet = await getPetById(petId, token);
+  const session = await auth.api
+    .getSession({
+      headers: requestHeaders,
+    })
+    .catch(() => null);
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const token = session
+    ? await auth.api
+        .getToken({
+          headers: requestHeaders,
+        })
+        .then((value) => value?.token || "")
+        .catch(() => "")
+    : "";
+
+  const pet = await getPetById(petId);
 
   const userEmail = session?.user?.email;
 
@@ -74,6 +82,27 @@ const PetDetailsPage = async ({ params }: PageProps) => {
         {userEmail === pet.ownerEmail ? (
           <div className="lg:col-span-4 lg:sticky lg:top-24">
             <OwnerWarningCard />
+          </div>
+        ) : !session ? (
+          <div className="lg:col-span-4 lg:sticky lg:top-24">
+            <div className="rounded-[24px] border border-border bg-card p-6 md:p-8 shadow-sm">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+                Adopt this pet
+              </p>
+              <h2 className="mt-3 text-3xl font-bold text-foreground">
+                Sign in to send an adoption request
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-muted-foreground">
+                You can view pet details without logging in. To submit an
+                adoption request, please sign in first.
+              </p>
+              <Link
+                href={`/signin?redirect=/all-pets/${petId}`}
+                className="btn-primary mt-6 w-full"
+              >
+                Sign In to Adopt
+              </Link>
+            </div>
           </div>
         ) : (
           <PetDetailAdoptForm pet={pet} token={token} />

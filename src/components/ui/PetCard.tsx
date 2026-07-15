@@ -1,8 +1,8 @@
+import { Pet } from "@/types";
+import { ArrowRight, Heart, MapPin, PawPrint, ShieldCheck } from "lucide-react";
 import Image from "next/image";
-import { Heart, MapPin, ShieldCheck, ArrowRight, PawPrint } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { Pet } from "@/types";
 
 interface PetCardProps {
   pet: Pet;
@@ -30,10 +30,10 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
         {/* OVERLAY */}
         <div className="absolute inset-0 z-1 bg-linear-to-t from-black/40 via-black/5 to-transparent" />
 
-        {/* FAVORITE BUTTON */}
-        <button className="absolute left-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/80 text-foreground/80 backdrop-blur-md transition-all duration-300 hover:scale-110 dark:bg-black/30 dark:text-primary cursor-pointer">
+        {/* FAVORITE BUTTON
+        <button className="absolute left-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/80 text-foreground/80 backdrop-blur-md transition-all duration-300 hover:scale-110 dark:bg-black/30 dark:text-primary btn-secondary p-0">
           <Heart className="h-5 w-5" />
-        </button>
+        </button> */}
 
         {/* STATUS BADGE */}
         <div className="absolute right-4 top-4 z-10 rounded-full bg-primary px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-primary-foreground shadow-lg">
@@ -57,7 +57,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
       </div>
 
       {/* CONTENT */}
-      <div className="space-y-5 p-6">
+      <div className="space-y-3 p-6">
         {/* TITLE + PRICE */}
         <div className="flex items-start justify-between gap-4">
           <div>
@@ -124,10 +124,10 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
         </div>
 
         {/* BUTTONS */}
-        <div className="grid grid-cols-1 gap-3 pt-2">
+        <div className="grid grid-cols-2 gap-3 pt-2">
           <Link
             href={`/all-pets/${_id}`}
-            className="flex h-12 items-center justify-center gap-2 rounded-2xl border border-border bg-background font-semibold text-foreground transition-all duration-300 hover:border-primary hover:bg-primary/10 hover:text-primary"
+            className="btn-secondary h-12 rounded-2xl"
           >
             View Details
             <ArrowRight className="h-4 w-4" />
@@ -135,7 +135,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
 
           <Link
             href={`/all-pets/${_id}`}
-            className="flex h-12 items-center justify-center gap-2 rounded-2xl bg-primary font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-[0.98] hover:opacity-90"
+            className="btn-primary h-12 rounded-2xl"
           >
             Adopt Now
             <Heart className="h-4 w-4 fill-current" />

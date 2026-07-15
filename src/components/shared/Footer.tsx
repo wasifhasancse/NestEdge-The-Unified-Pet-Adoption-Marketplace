@@ -1,13 +1,13 @@
-import Link from "next/link";
-import { Share2, Send } from "lucide-react";
-import { LuFacebook } from "react-icons/lu";
 import NestEdgeLogo from "@/components/ui/NestEdgeLogo";
+import { Send, Share2 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
+import { LuFacebook } from "react-icons/lu";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-card text-foreground border-t border-border py-20">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer className="border-t border-border bg-card py-16 text-foreground sm:py-20">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 sm:px-6 md:grid-cols-2 xl:grid-cols-4">
         {/* Brand Section */}
         <div>
           <div className="flex items-center gap-2 mb-6 text-foreground">
@@ -23,14 +23,14 @@ const Footer: React.FC = () => {
           <div className="flex gap-4">
             <Link
               href="#"
-              className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition text-muted-foreground hover:border-primary"
+              className="btn-secondary h-10 w-10 rounded-full p-0 text-muted-foreground hover:border-primary hover:text-primary-foreground"
             >
               <LuFacebook className="w-4 h-4" />
             </Link>
 
             <Link
               href="#"
-              className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition text-muted-foreground hover:border-primary"
+              className="btn-secondary h-10 w-10 rounded-full p-0 text-muted-foreground hover:border-primary hover:text-primary-foreground"
             >
               <Share2 className="w-4 h-4" />
             </Link>
@@ -39,33 +39,41 @@ const Footer: React.FC = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-bold mb-6">Quick Links</h4>
+          <h4 className="mb-6 text-lg font-bold">Explore</h4>
           <ul className="space-y-4 text-muted-foreground">
-            {["Find a Pet", "Pet Care Tips", "Success Stories", "Donation"].map(
-              (item) => (
-                <li key={item}>
-                  <Link href="#" className="hover:text-primary transition">
-                    {item}
-                  </Link>
-                </li>
-              )
-            )}
+            {[
+              { label: "Find a Pet", href: "/all-pets" },
+              { label: "Blogs", href: "/blogs" },
+              { label: "About", href: "/about" },
+              { label: "Contact", href: "/contact" },
+            ].map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className="hover:text-primary transition"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         {/* Support */}
         <div>
-          <h4 className="text-lg font-bold mb-6">Support</h4>
+          <h4 className="mb-6 text-lg font-bold">Support</h4>
           <ul className="space-y-4 text-muted-foreground">
             {[
-              "Help Center",
-              "Contact Us",
-              "Privacy Policy",
-              "Terms of Service",
+              { label: "Help Center", href: "/contact" },
+              { label: "Contact Us", href: "/contact" },
+              { label: "About NestEdge", href: "/about" },
             ].map((item) => (
-              <li key={item}>
-                <Link href="#" className="hover:text-primary transition">
-                  {item}
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className="hover:text-primary transition"
+                >
+                  {item.label}
                 </Link>
               </li>
             ))}
@@ -87,7 +95,7 @@ const Footer: React.FC = () => {
               className="w-full px-4 py-3 rounded-lg bg-card border border-border text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-primary outline-none"
             />
 
-            <button className="px-4 py-3 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition flex items-center justify-center cursor-pointer">
+            <button className="btn-primary rounded-lg px-4 py-3">
               <Send className="w-4 h-4" />
             </button>
           </div>
@@ -95,7 +103,7 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Bottom */}
-      <div className="max-w-7xl mx-auto px-6 mt-16 pt-6 border-t border-border text-center text-sm text-muted-foreground">
+      <div className="mx-auto mt-12 max-w-7xl border-t border-border px-4 pt-6 text-center text-sm text-muted-foreground sm:px-6">
         © 2026 NestEdge. All rights reserved.
       </div>
     </footer>
