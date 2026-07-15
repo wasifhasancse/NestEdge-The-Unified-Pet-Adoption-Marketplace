@@ -1,5 +1,6 @@
+import DeleteListingModal from "@/components/dashboard/DeleteListingModal";
 import { Pet } from "@/types";
-import { MapPin, Pencil, PawPrint, HeartHandshake } from "lucide-react";
+import { HeartHandshake, MapPin, PawPrint, Pencil } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -12,8 +13,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ pet }) => {
   const isAvailable = pet.status === "available";
 
   return (
-    <article className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
-      <div className="relative aspect-[4/3] bg-muted">
+    <article className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+      <div className="relative aspect-4/3 bg-muted">
         {pet.image ? (
           <Image
             src={pet.image}
@@ -31,7 +32,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ pet }) => {
         <span
           className={`absolute left-4 top-4 rounded-full border px-3 py-1 text-xs font-semibold capitalize backdrop-blur ${
             isAvailable
-              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-600"
+              ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-100"
               : "border-amber-500/20 bg-amber-500/10 text-amber-600"
           }`}
         >
@@ -39,7 +40,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ pet }) => {
         </span>
       </div>
 
-      <div className="space-y-4 p-5">
+      <div className="space-y-2 p-3">
         <div>
           <h3 className="text-lg font-bold text-foreground">{pet.petName}</h3>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -69,7 +70,7 @@ const ListingCard: React.FC<ListingCardProps> = ({ pet }) => {
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="grid grid-cols-2 gap-3 ">
           <Link
             href={`/dashboard/my-listings/edit/${pet._id}`}
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
@@ -78,12 +79,15 @@ const ListingCard: React.FC<ListingCardProps> = ({ pet }) => {
             Edit
           </Link>
           <Link
-            href="/dashboard/my-listings"
+            href="/dashboard/adoption-requests"
             className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted"
           >
             <HeartHandshake className="h-4 w-4 text-primary" />
             Requests
           </Link>
+          <div className="col-span-2">
+            <DeleteListingModal petId={pet._id} petName={pet.petName} />
+          </div>
         </div>
       </div>
     </article>
