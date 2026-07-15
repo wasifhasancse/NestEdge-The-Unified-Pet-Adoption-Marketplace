@@ -11,7 +11,7 @@ interface PageProps {
 
 const AllPetsPage = async ({ searchParams }: PageProps) => {
   const sParams = await searchParams;
-  
+
   // Format query parameters
   const queryObj: Record<string, string> = {};
   Object.keys(sParams).forEach((key) => {
@@ -27,12 +27,12 @@ const AllPetsPage = async ({ searchParams }: PageProps) => {
   const { pets, totalPages } = await getAllPets(queryString);
 
   return (
-    <section className="bg-background pt-20">
+    <section className="bg-background pt-5">
       <div className="max-w-7xl mx-auto">
         <PetSearchSection />
 
         {pets.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-10 mb-10 px-6 text-center">
+          <div className="flex flex-col items-center justify-center py-5 mb-10 px-6 text-center">
             <div className="w-28 h-28 rounded-full bg-primary/10 flex items-center justify-center mb-6">
               <Search className="w-14 h-14 text-primary" />
             </div>
@@ -42,7 +42,7 @@ const AllPetsPage = async ({ searchParams }: PageProps) => {
             </h2>
 
             <p className="mt-4 max-w-md text-muted-foreground leading-relaxed">
-              We couldn’t find any pets matching your search or filters. Try
+              We couldn&apos;t find any pets matching your search or filters. Try
               adjusting your filters or searching with a different keyword.
             </p>
           </div>

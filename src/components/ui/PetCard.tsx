@@ -17,6 +17,7 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
     gender,
     adoptionFee,
     healthStatus,
+    description,
     image,
     location,
     status,
@@ -91,14 +92,17 @@ const PetCard: React.FC<PetCardProps> = ({ pet }) => {
             {gender}
           </span>
 
-          <span className="rounded-xl border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
+          {/* <span className="rounded-xl border border-primary/20 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
             {healthStatus}
-          </span>
+          </span> */}
+        </div>
+        <div className="mt-3 text-sm text-muted-foreground line-clamp-2">
+          {description}
         </div>
 
         {/* LOCATION */}
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="h-4 w-4 text-primary" />
+          <MapPin className="h-4 w-4 text-green-600" />
           <span>{location}</span>
         </div>
 

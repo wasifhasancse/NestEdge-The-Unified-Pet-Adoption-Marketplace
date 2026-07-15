@@ -12,8 +12,11 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Get current page from URL, default to 1
-  const currentPage = Number(searchParams.get("page")) || 1;
+  // Keep current page safe even if URL query is invalid or out of range.
+  const queryPage = Number(searchParams.get("page"));
+  const currentPage = Number.isFinite(queryPage)
+    ? Math.min(totalPages, Math.max(1, queryPage))
+    : 1;
   const [goToValue, setGoToValue] = useState<string>("");
 
   const createPageUrl = (pageNumber: number): string => {
@@ -28,14 +31,38 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
     }
   };
 
+  const parseTargetPage = (value: string): number | null => {
+    const parsed = Number.parseInt(value, 10);
+    if (Number.isNaN(parsed)) return null;
+    if (parsed < 1 || parsed > totalPages) return null;
+    return parsed;
+  };
+
   const handleGoToSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const targetPage = parseInt(goToValue, 10);
-    if (!isNaN(targetPage) && targetPage >= 1 && targetPage <= totalPages) {
-      handlePageChange(targetPage);
+    const targetPage = parseTargetPage(goToValue);
+
+    if (targetPage === null) {
       setGoToValue("");
+      return;
     }
+
+    if (targetPage !== currentPage) {
+      handlePageChange(targetPage);
+    }
+
+    setGoToValue("");
   };
+
+  const handleGoToInputChange = (value: string) => {
+    const numericOnly = value.replace(/\D/g, "");
+    const maxDigits = String(totalPages).length;
+    setGoToValue(numericOnly.slice(0, maxDigits));
+  };
+
+  const nextPageTarget = parseTargetPage(goToValue);
+  const disableGoButton =
+    nextPageTarget === null || nextPageTarget === currentPage;
 
   const renderPageNumbers = () => {
     const pages: (number | string)[] = [];
@@ -121,13 +148,27 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages }) => {
         >
           <span>Go to</span>
           <input
-            type="number"
-            min="1"
-            max={totalPages}
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
             value={goToValue}
-            onChange={(e) => setGoToValue(e.target.value)}
+            onChange={(e) => handleGoToInputChange(e.target.value)}
+            onBlur={() => {
+              if (goToValue && parseTargetPage(goToValue) === null) {
+                setGoToValue("");
+              }
+            }}
+            placeholder={currentPage.toString()}
+            aria-label="Go to page"
             className="w-14 h-8 bg-primary/20 text-primary font-semibold text-center rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
+          <button
+            type="submit"
+            disabled={disableGoButton}
+            className="h-8 px-3 rounded-lg bg-primary text-primary-foreground font-semibold text-xs transition hover:opacity-90 disabled:opacity-40 disabled:pointer-events-none"
+          >
+            Go
+          </button>
           <span>Page</span>
         </form>
       </div>

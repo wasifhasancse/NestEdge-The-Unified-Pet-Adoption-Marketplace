@@ -85,8 +85,8 @@ const PetDetailPageContent: React.FC<PetDetailPageContentProps> = ({ pet }) => {
         {/* BOTTOM INFO */}
         <div className="mt-7 pt-6 border-t border-border flex flex-wrap gap-6">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-full bg-secondary/10">
-              <MapPin className="w-4 h-4 text-secondary" />
+            <div className="p-2 rounded-full bg-green-500/10">
+              <MapPin className="w-4 h-4 text-green-600" />
             </div>
             <span className="text-sm text-foreground font-medium">
               {location}
