@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FlexPulse - Fitness & Gym Management Platform
 
-## Getting Started
+FlexPulse is a full-stack fitness platform for members, trainers, and admins. Members can discover classes, book sessions, save favorites, and join forum discussions. Trainers can create and manage classes and publish forum posts. Admins moderate users, classes, trainer applications, transactions, and community content.
 
-First, run the development server:
+## Live URL
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Client: https://flex-pulse-fitness-gym.vercel.app/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Purpose
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Provide a role-based gym management platform with a modern UX.
+- Support a real booking flow with Stripe payment.
+- Enable trainer and admin moderation workflows.
+- Build an active fitness community through public forum content and private engagement.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Main Features
 
-## Learn More
+### Unique and High-Demand Features
 
-To learn more about Next.js, take a look at the following resources:
+- Approval-gated publishing pipeline where only admin-approved classes and forum posts appear publicly, preventing low-quality or unsafe content exposure.
+- End-to-end trainer application workflow with approve/reject decisions plus admin feedback, creating a transparent path from applicant to verified trainer.
+- Transaction-linked booking lifecycle using Stripe checkout and history tracking so members can map payments directly to booking actions.
+- Role-aware moderation dashboard that combines user block/unblock, role updates, content control, and application handling in one control surface.
+- Community forum interactions with like/dislike, nested discussion flow (comments and replies), and ownership-safe edit/delete permissions.
+- Server-side pagination on heavy public surfaces (All Classes and Community Forum) to keep performance stable as platform content scales.
+- Private route hardening for detail pages and dashboards, including authenticated reload-safe behavior for better real-world session continuity.
+- Member engagement tools that combine favorites, bookings, and personalized class exploration in one flow rather than isolated modules.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Core Platform Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Better Auth based authentication with email/password and Google.
+- Role-based dashboard for member, trainer, and admin.
+- Protected private routes for class/forum details and dashboard pages.
+- Class discovery with search by class name and category filter.
+- Public listing shows approved classes/posts only.
+- Global loading state and custom 404 page.
+- Fully responsive design across mobile, tablet, and desktop.
 
-## Deploy on Vercel
+## Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Frontend: Next.js (App Router), React, Tailwind CSS, HeroUI, Framer Motion
+- Backend: Node.js, Express, MongoDB
+- Auth: Better Auth + JWT
+- Payment: Stripe
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## NPM Packages Used
+
+### Client
+
+- next
+- react
+- react-dom
+- better-auth
+- @better-auth/mongo-adapter
+- mongodb
+- @heroui/react
+- framer-motion
+- stripe
+- recharts
+- react-icons
+- swiper
+
+### Server
+
+- express
+- cors
+- dotenv
+- mongodb
+- jose-cjs
+
+## Deployment Checklist
+
+- Use environment variables for all secrets and credentials.
+- Ensure backend CORS allows only trusted origins.
+- Ensure API routes do not return 404/504 in production.
+- Verify private routes are reload-safe for authenticated users.
+- Verify all dynamic routes render without runtime errors.

@@ -131,7 +131,9 @@ const SignInForm: React.FC = () => {
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground transition hover:text-primary"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? (
                       <Eye className="h-5 w-5" />
@@ -142,7 +144,9 @@ const SignInForm: React.FC = () => {
                 </div>
               </div>
 
-              {error && <p className="text-sm font-medium text-destructive">{error}</p>}
+              {error && (
+                <p className="text-sm font-medium text-destructive">{error}</p>
+              )}
 
               <div className="pt-1 text-right">
                 <button
