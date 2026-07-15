@@ -37,8 +37,8 @@ const Banner: React.FC = () => {
   // Light mode slider images
   const slidesLight = [
     "https://images.unsplash.com/photo-1560114928-40f1f1eb26a0",
-    "https://images.unsplash.com/photo-1663127046003-ef3ec7ce7bc4",
-    "https://images.unsplash.com/photo-1664371675060-87e49122263c",
+    "https://images.unsplash.com/photo-1687425961065-46efeb465c66",
+    "https://images.unsplash.com/photo-1510337550647-e84f83e341ca",
     "https://images.unsplash.com/photo-1565712546991-158cb3885821",
     "https://images.unsplash.com/photo-1696334137510-5025957ef28e"
   ];
